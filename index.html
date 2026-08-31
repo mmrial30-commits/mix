@@ -18,7 +18,25 @@ button,select,textarea,input{font:inherit}button{cursor:pointer}.app{max-width:1
 .direction{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choice{border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px;text-align:left}.choice.active{border-color:var(--primary);background:var(--soft)}.choice b{display:block;font-size:12px}.choice span{display:block;margin-top:4px;font-size:10px;color:var(--muted);line-height:1.4}
 .pose-toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 12px}.pose-toolbar .btn{flex:0 0 auto}.pose-selected{font-size:12px;color:var(--muted);font-weight:800}.pose-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:560px;overflow:auto;padding:2px}.pose-btn{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px;text-align:left;font-size:12px;font-weight:800;cursor:pointer;line-height:1.35}.pose-btn:hover,.pose-btn.active{border-color:var(--primary);background:#eef2ff;color:var(--primary)}@media(max-width:760px){.pose-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .output-card{position:sticky;top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.output-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.output-head h3{margin:0;font-size:16px}#wearFinal{min-height:620px;background:var(--dark);color:#f8fafc;border-color:#1d2939;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
-.note{padding:11px 12px;border-radius:11px;background:#fffaeb;border:1px solid #fedf89;color:#7a2e0e;font-size:11px;line-height:1.6;margin-top:12px}.toast{position:fixed;right:22px;bottom:22px;background:#101828;color:#fff;padding:12px 16px;border-radius:10px;transform:translateY(140%);transition:.22s;z-index:50}.toast.show{transform:translateY(0)}
+.note{padding:11px 12px;border-radius:11px;background:#fffaeb;border:1px solid #fedf89;color:#7a2e0e;font-size:11px;line-height:1.6;margin-top:12px}
+.wear-title{margin-bottom:16px}
+.wear-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.wear-step{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px}
+.wear-step.accent{background:linear-gradient(135deg,#eef2ff,#ecfeff);border-color:#c7d2fe}
+.step-num{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#f2f4f7;color:#344054;font-weight:900;font-size:12px;flex:0 0 auto}.wear-step.accent .step-num{background:var(--primary);color:#fff}
+.wear-step b{display:block;font-size:12px}.wear-step small{display:block;margin-top:3px;color:var(--muted);font-size:10px;line-height:1.4}
+.wear-prompt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.wear-prompt-card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:20px;box-shadow:0 4px 14px rgba(16,24,40,.04)}
+.wear-prompt-card.front-card{border-top:4px solid #4f46e5}.wear-prompt-card.reverse-card{border-top:4px solid #06b6d4}
+.wear-card-top{display:flex;gap:13px;align-items:flex-start}.wear-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#eef2ff;color:var(--primary);font-weight:1000;flex:0 0 auto}.reverse-card .wear-icon{background:#ecfeff;color:#0891b2}
+.eyebrow{display:block;font-size:9px;letter-spacing:.14em;color:#98a2b3;font-weight:1000;margin-bottom:3px}.wear-card-top h3{margin:0 0 6px;font-size:18px;letter-spacing:-.03em}.wear-card-top p{margin:0;color:var(--muted);font-size:11px;line-height:1.55}
+.wear-tags{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 14px}.wear-tags span{padding:6px 8px;border-radius:999px;background:#f8fafc;border:1px solid var(--line);font-size:10px;color:#475467;font-weight:800}
+.wear-copy{width:100%;padding:13px 14px;font-size:13px}
+.prompt-preview{margin-top:10px;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fafafa}.prompt-preview summary{padding:10px 12px;cursor:pointer;font-size:11px;font-weight:900;color:#667085;user-select:none}.prompt-preview pre{margin:0;padding:14px;border-top:1px solid var(--line);max-height:360px;overflow:auto;white-space:pre-wrap;word-break:keep-all;background:#101828;color:#f8fafc;font:11px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.wear-footnote{margin-top:14px;display:flex;gap:10px;align-items:flex-start;padding:13px 14px;border:1px solid #d0d5dd;border-radius:13px;background:#fff}.wear-footnote b{font-size:11px;white-space:nowrap}.wear-footnote span{font-size:11px;color:#667085;line-height:1.55}
+@media(max-width:760px){.wear-steps,.wear-prompt-grid{grid-template-columns:1fr}.wear-footnote{display:block}.wear-footnote b{display:block;margin-bottom:4px}}
+
+.toast{position:fixed;right:22px;bottom:22px;background:#101828;color:#fff;padding:12px 16px;border-radius:10px;transform:translateY(140%);transition:.22s;z-index:50}.toast.show{transform:translateY(0)}
 @media(max-width:900px){.builder,.workflow{grid-template-columns:1fr}.output-card{position:static}.product-grid{grid-template-columns:1fr}}@media(max-width:620px){.topbar{align-items:flex-start;flex-direction:column}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.direction{grid-template-columns:1fr}.tabs{width:100%}.tab{flex:1}}
 </style>
 </head>
@@ -40,30 +58,37 @@ button,select,textarea,input{font:inherit}button{cursor:pointer}.app{max-width:1
   </section>
 
   <section id="wearPanel" class="panel">
-    <div class="section-title"><div><h2>착용컷 프롬프트 조합기</h2><p>제품 정면샷 + 착장 레퍼런스만 첨부합니다. 앞면/반대편과 포즈만 고르면 최종 프롬프트가 즉시 완성됩니다.</p></div></div>
-    <div class="workflow">
-      <div class="hero-card"><b>① 이미지 1 — 팔찌 제품 정면샷</b><p>현재 작업의 절대 PRODUCT MASTER. 작업마다 제품이 달라질 수 있으므로 이전 팔찌의 색상·파츠·배열을 기억하거나 재사용하지 않습니다.</p></div>
-      <div class="hero-card"><b>② 이미지 2 — 착장 / 모델 레퍼런스</b><p>모델 분위기·착장·패션 감도·조명·명암·촬영 감도만 참고합니다. 기본값은 약 80% 참고 + 포즈·손동작·일부 착장 디테일 20% 새 연출입니다.</p></div>
-    </div>
-    <div class="note"><b>제품 우선순위:</b> 현재 첨부된 팔찌 제품 사진 &gt; 착장 레퍼런스 &gt; 모든 연출 지시. 팔찌 디자인에는 80/20 창작 비율을 적용하지 않습니다.</div>
+    <div class="section-title wear-title"><div><h2>착용컷 프롬프트</h2><p>검증된 앞면 / 반대편 프롬프트를 그대로 사용합니다. 제품 사진 + 착장 레퍼런스를 첨부한 뒤 원하는 방향만 복사하세요.</p></div></div>
 
-    <div class="builder">
-      <div class="form-card">
-        <div class="field full"><label>팔찌 노출 방향</label><div class="direction" id="directionChoices">
-          <button class="choice active" type="button" data-value="front"><b>앞면 메인</b><span>제품사진의 카메라 가까운 앞쪽 스트랜드가 정면</span></button>
-          <button class="choice" type="button" data-value="reverse"><b>반대편 메인</b><span>동일 팔찌 전체를 손목에서 약 180° 회전</span></button>
-        </div></div>
-        <div class="field full"><label>포즈</label>
-          <div class="pose-toolbar"><button class="btn primary" type="button" id="randomPose">🎲 랜덤 포즈</button><span class="pose-selected" id="poseSelected"></span></div>
-          <div class="pose-buttons" id="poseButtons"></div>
-          <small>모든 착용컷은 손목·팔찌 중심. 원하는 포즈를 직접 누르거나 랜덤으로 선택합니다.</small>
+    <div class="wear-steps">
+      <div class="wear-step"><span class="step-num">1</span><div><b>팔찌 제품 사진</b><small>현재 작업의 PRODUCT MASTER</small></div></div>
+      <div class="wear-step"><span class="step-num">2</span><div><b>착장 · 모델 레퍼런스</b><small>모델·스타일·조명·촬영감 참고</small></div></div>
+      <div class="wear-step accent"><span class="step-num">3</span><div><b>방향 선택 후 복사</b><small>포즈 선택 없이 검증된 프롬프트 그대로</small></div></div>
+    </div>
+
+    <div class="wear-prompt-grid">
+      <article class="wear-prompt-card front-card">
+        <div class="wear-card-top">
+          <div class="wear-icon">F</div>
+          <div><span class="eyebrow">FRONT</span><h3>앞면 메인 착용컷</h3><p>제품 사진의 카메라 가까운 앞쪽 스트랜드를 메인으로 보여줍니다.</p></div>
         </div>
-        <div class="field full"><label>추가 지시사항 · 선택</label><textarea id="extra" placeholder="예: 얼굴 제외, 흰 블라우스, 손목을 조금 더 가까이, 배경은 심플하게"></textarea></div>
-        <div class="note"><b>기본값 고정:</b> 착용컷은 항상 손목 위주 · 착장/모델/상의/조명/명암/촬영 감도는 레퍼런스를 약 80% 참고 · 포즈/손동작/일부 착장 디테일만 약 20% 새롭게 연출 · 중성~약간 차가운 화이트밸런스.</div>
-      </div>
+        <div class="wear-tags"><span>앞쪽 스트랜드</span><span>폭 5% 좁게</span><span>레퍼런스 80%</span></div>
+        <button class="btn primary wear-copy" type="button" data-wear="front">앞면 프롬프트 복사</button>
+        <details class="prompt-preview"><summary>프롬프트 확인</summary><pre id="frontPreview"></pre></details>
+      </article>
 
-      <aside class="output-card"><div class="output-head"><h3>최종 착용컷 프롬프트</h3><button class="btn primary" id="copyWear">복사</button></div><textarea id="wearFinal" readonly></textarea><div class="actions"><button class="btn secondary" id="resetWear">기본값으로 초기화</button></div></aside>
+      <article class="wear-prompt-card reverse-card">
+        <div class="wear-card-top">
+          <div class="wear-icon">R</div>
+          <div><span class="eyebrow">REVERSE</span><h3>반대편 메인 착용컷</h3><p>동일한 원형 팔찌 전체를 회전시켜 뒤쪽 스트랜드를 메인으로 보여줍니다.</p></div>
+        </div>
+        <div class="wear-tags"><span>반대편 스트랜드</span><span>전체 회전</span><span>레퍼런스 80%</span></div>
+        <button class="btn primary wear-copy" type="button" data-wear="reverse">반대편 프롬프트 복사</button>
+        <details class="prompt-preview"><summary>프롬프트 확인</summary><pre id="reversePreview"></pre></details>
+      </article>
     </div>
+
+    <div class="wear-footnote"><b>사용 방식</b><span>이미지 1에 팔찌 제품 사진, 이미지 2에 착장 레퍼런스를 첨부한 뒤 위 프롬프트 중 하나를 그대로 붙여넣습니다.</span></div>
   </section>
 </div>
 <div class="toast" id="toast">복사 완료</div>
@@ -555,173 +580,18 @@ Before output, verify:
 - no bead has changed shape, size, color, texture, or sequence
 - the image remains a close-up of the original top-view photograph`
 };
-const posePrompts={
-  "P01":"Extend the bracelet wrist slightly toward the camera with relaxed fingers. Keep the bracelet unobstructed and closest to the lens.",
-  "P02":"Let the bracelet arm hang naturally beside the body with the wrist gently turned toward camera.",
-  "P03":"Use the opposite hand to lightly support the underside of the bracelet wrist without touching or covering the bracelet.",
-  "P04":"Let the bracelet hand lightly hold the opposite elbow while keeping the bracelet wrist exposed near frame center.",
-  "P05":"Use the opposite hand to gently adjust the bracelet-side sleeve upward, stopping clearly above the bracelet.",
-  "P06":"Lightly hold a shoulder-bag strap with the bracelet hand while keeping the strap away from the bracelet.",
-  "P07":"Hold a simple cup by its handle in a natural lifestyle gesture; keep the bracelet wrist clearly visible.",
-  "P08":"Loosely wrap the bracelet hand around a plain clear glass, keeping the wrist above the glass and unobstructed.",
-  "P09":"Hold a plain smartphone casually in the bracelet hand with the phone below the wrist and the bracelet fully visible.",
-  "P10":"Hold a plain smartphone with both hands while keeping the bracelet wrist on the outside edge and clearly visible.",
-  "P11":"Turn one page of an open book with the bracelet hand, keeping the wrist and bracelet above the page and in focus.",
-  "P12":"Support the lower edge of a closed book with the bracelet hand while keeping the bracelet clearly separated from the book.",
-  "P13":"Browse through vinyl records with the bracelet hand, fingertips touching one sleeve while the wrist stays visible.",
-  "P14":"Reach naturally toward a small unbranded object on a table, with the bracelet wrist leading the gesture and remaining visible.",
-  "P15":"Rest the bracelet forearm diagonally on a clean tabletop, palm down, with the bracelet clearly visible near the center.",
-  "P16":"Rest the forearm on a table edge and let the hand fall naturally beyond it, exposing the bracelet at the wrist.",
-  "P17":"Rest the bracelet hand lightly on a simple railing with fingers relaxed and the wrist fully visible.",
-  "P18":"Press a simple door lever naturally with the bracelet hand, keeping the wrist closest to camera and unobstructed.",
-  "P19":"Gently move a plain curtain aside with the bracelet fingertips while keeping the bracelet wrist visible in side view.",
-  "P20":"Raise the bracelet hand to tuck a small section of hair behind the ear while keeping hair away from the bracelet.",
-  "P21":"Gather only the lower ends of the hair near the shoulder with the bracelet hand, leaving the wrist fully visible.",
-  "P22":"Reach behind the neck to adjust hair with the bracelet hand; keep the wrist turned outward so the bracelet remains visible.",
-  "P23":"Lightly touch or smooth the neckline, lapel, or shoulder strap with the bracelet hand while keeping the wrist exposed.",
-  "P24":"Pinch one small section of the top hem and pull it outward subtly with the bracelet hand, keeping the wrist unobstructed.",
-  "P25":"Lightly pinch a small section of skirt fabric with the bracelet hand while keeping the wrist free and visible.",
-  "P26":"Insert the bracelet hand halfway into a front pocket while keeping the wrist and bracelet fully outside the pocket edge.",
-  "P27":"Hook only the thumb into a front pocket while all other fingers remain outside and the bracelet stays above the pocket line.",
-  "P28":"Rest the bracelet hand naturally at the side waist above the hip with the elbow relaxed and wrist turned toward camera.",
-  "P29":"While seated, rest the bracelet hand palm-down on one knee and keep the bracelet centered and unobstructed.",
-  "P30":"While seated, let the bracelet arm descend naturally between the knees with the hand relaxed and wrist visible.",
-  "P31":"Loosely overlap both hands on the lap or torso with the bracelet hand clearly on top and the wrist exposed.",
-  "P32":"Cross the bracelet arm diagonally and rest the hand lightly on the opposite shoulder, keeping the bracelet visible in front of the torso.",
-  "P33":"Hold one thin flower stem loosely between the fingers of the bracelet hand, keeping the wrist unobstructed.",
-  "P34":"Hold folded sunglasses by one temple with the bracelet hand while keeping the object secondary and the wrist visible.",
-  "P35":"Loosely hold plain shopping-bag handles with the bracelet hand, keeping the bracelet clearly above the grip.",
-  "P36":"Capture a candid mid-step moment with the bracelet arm swinging naturally forward while the bracelet and wrist remain sharp."
+const wearPrompts = {
+  front: "첨부된 이미지를 기반으로 현실적인 **팔찌 중심 패션 착용컷**을 만들어 주세요.\n\n### 팔찌 — 최우선\n\n**제품 사진의 팔찌와 완전히 동일한 팔찌를 그대로 손목에 착용**시킵니다.\n팔찌 폭은 보이는 것보다 5% 좁게 해줘. \n\n비즈의 **총 개수, 원형 스트랜드를 따른 실제 배열 순서, 색상, 소재, 크기, 간격과 모든 특수 파츠의 위치 관계를 정확하게 유지**합니다.\n\n제품 사진의 2D 화면상 위치가 아니라 **실제 하나의 연속된 원형 팔찌 구조**로 해석하세요. 앞뒤 비즈가 화면상 가까워 보여도 실제 이웃 비즈로 재배열하지 마세요.\n\n**제품 사진에서 카메라에 가까운 앞쪽 스트랜드가 착용컷에서도 메인으로 보이게** 팔찌를 손목에 배치합니다.\n\n이 팔찌의 경우 **파란색 눈알 파츠가 있는 앞쪽 구간이 카메라를 향하도록** 합니다. 반대편의 노란색 눈알 파츠는 실제 배열상 뒤쪽에 있으므로 억지로 앞면에 함께 노출하지 마세요.\n\n### 연출\n\n팔찌가 가장 잘 보이도록 손목을 카메라 가까이 배치하고 자연스럽게 클로즈업합니다.\n\n착장 레퍼런스의 모델·스타일·조명·명암·촬영 감도를 약 **70% 참고**하되, 포즈와 손동작, 나머지 30% 착장 디테일(넥라인, 프릴·레이스 여부, 소매·스트랩 형태, 허리선·핏, 옷 길이·실루엣, 소재·컬러·패턴, 레이어링, 신발 종류·컬러, 헤어 길이·스타일·컬러·앞머리·가르마, 액세서리, 가방, 시선·표정, 카메라 앵글·크롭, 배경 소품·색감, 조명·사진 질감. 랜덤으로 바꿔 매번)은 자연스럽게 새롭게 연출합니다.   \n\n팔찌 외 모든 액세서리는 제거합니다.\n\n현실적인 고해상도 패션 사진, 자연스러운 피부 질감, 중성\\~약간 차가운 화이트밸런스.\n\n**팔찌 배열은 절대 변경하지 말고, 앞쪽 스트랜드가 메인으로 보이는 실제 착용 상태로 표현합니다.**",
+  reverse: "첨부된 이미지를 기반으로 현실적인 **팔찌 반대편 중심 패션 착용컷**을 만들어 주세요.\n\n### 팔찌 — 최우선\n\n**제품 사진의 팔찌와 완전히 동일한 팔찌를 그대로 손목에 착용**시킵니다.\n팔찌 폭은 보이는 것보다 5% 좁게 해줘. \n \n비즈의 **총 개수, 원형 스트랜드를 따른 실제 배열 순서, 색상, 소재, 크기, 간격과 모든 특수 파츠의 위치 관계를 정확하게 유지**합니다. \n \n제품 사진의 2D 화면상 위치가 아니라 **실제 하나의 연속된 원형 팔찌 구조**로 해석하세요. 비즈를 이동·재배열·추가·삭제·복제하지 마세요. \n \n### 반대편 노출 — 매우 중요 \n \n이번 이미지는 일반적인 앞면 착용컷이 아닙니다. \n \n**제품 사진에서 뒤쪽에 위치한 스트랜드가 손목의 카메라 정면으로 오도록 팔찌 전체를 원형 그대로 회전시켜 착용합니다.** \n \n즉, 비즈 순서를 바꾸는 것이 아니라 **동일한 팔찌를 손목 둘레에서 약 180도 회전시켜 반대편 구간을 보여주는 것**입니다. \n \n이 팔찌의 경우 **노란색 눈알 파츠가 위치한 뒤쪽 스트랜드를 메인으로 보여주세요.** \n \n노란색 눈알 파츠와 그 주변의 실제 비즈 배열이 가장 잘 보이도록 하고, **파란색 눈알 파츠가 있는 반대편 구간은 손목의 옆면 또는 뒤쪽으로 자연스럽게 돌아가도록** 합니다. \n \n파란색과 노란색 파츠를 서로 옆으로 이동시키지 마세요. **두 파츠 사이에 존재하는 실제 비즈들을 그대로 유지**합니다. \n \n### 앵글 및 연출 \n \n기존 착용컷과 **카메라 앵글과 손목 방향도 살짝 변경**합니다. \n \n손목을 자연스럽게 약간 회전시키고 카메라도 정면이 아닌 **가벼운 사선 각도**에서 촬영하여, 이전 착용컷과 다른 사진처럼 연출합니다. \n \n팔찌의 **반대편 스트랜드가 가장 중요한 시각적 초점**이 되도록 클로즈업합니다. \n \n착장 레퍼런스의 모델·스타일·조명·명암·촬영 감도를 약 **70% 참고**하되, 포즈와 손동작, 나머지 30% 착장 디테일(넥라인, 프릴·레이스 여부, 소매·스트랩 형태, 허리선·핏, 옷 길이·실루엣, 소재·컬러·패턴, 레이어링, 신발 종류·컬러, 헤어 길이·스타일·컬러·앞머리·가르마, 액세서리, 가방, 시선·표정, 카메라 앵글·크롭, 배경 소품·색감, 조명·사진 질감. 랜덤으로 바꿔 매번)은 자연스럽게 새롭게 연출합니다.   \n \n팔찌 외 모든 액세서리는 제거합니다. \n \n현실적인 고해상도 패션 사진, 자연스러운 피부 질감, 중성\\~약간 차가운 화이트밸런스. \n \n**최우선: 팔찌를 재설계하는 것이 아니라 동일한 원형 팔찌 전체를 손목에서 회전시켜, 제품 사진에서 보이지 않던 반대편 스트랜드를 메인으로 보여줄 것.**"
 };
-let direction='front';
 const $=id=>document.getElementById(id);
 function toast(msg='복사 완료'){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
 async function copyText(text,btn){try{await navigator.clipboard.writeText(text);if(btn){const old=btn.textContent;btn.textContent='복사 완료 ✓';btn.classList.add('success');setTimeout(()=>{btn.textContent=old;btn.classList.remove('success')},1300)}toast();}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast();}}
 function copyProduct(key,btn){copyText(productPrompts[key],btn)}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.panel).classList.add('active')}));
-document.querySelectorAll('#directionChoices .choice').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#directionChoices .choice').forEach(x=>x.classList.remove('active'));b.classList.add('active');direction=b.dataset.value;buildWear()}));
-function directionBlock(){
- if(direction==='front') return `### SOURCE-OBJECT TRANSFER LOCK — 가장 중요
-이 작업은 팔찌를 설명문으로 다시 생성하는 작업이 아닙니다. **PRODUCT MASTER에 촬영된 팔찌 자체를 하나의 잠긴 연속 물체로 취급하여 손목 위로 옮기는 이미지 편집/오브젝트 전이 작업**으로 수행합니다.
-
-팔찌를 비즈 단위로 새로 그리거나, 보이는 특징을 보고 유사한 팔찌를 재합성하지 마세요. 먼저 PRODUCT MASTER의 팔찌 전체를 하나의 닫힌 루프로 고정한 뒤, **그 동일한 루프 전체만 손목 형태에 맞게 공간적으로 굽히고 회전하고 원근 변형**합니다.
-
-개별 비즈·파츠는 독립적으로 생성하거나 이동할 수 없습니다. 각 구성요소는 원래 양옆 이웃에 영구적으로 고정되어 있다고 가정합니다. 결과에서 특정 구간이 손목 뒤로 가려져도 구조를 보존하며, 가려진 부분을 보여주기 위해 새 비즈를 만들거나 다른 구간을 앞으로 당기지 마세요.
-
-### CLOSED-LOOP TOPOLOGY LOCK — 2D 해석 금지
-PRODUCT MASTER의 팔찌는 **하나의 닫힌 3D 원형 스트랜드**입니다. 먼저 현재 사진만을 기준으로 카메라에 가까운 전면 호를 FRONT ARC, 반대편 후면 호를 BACK ARC, 좌우에서 두 호가 실제로 이어지는 부분을 SIDE TURNING ZONES로 구분합니다.
-
-화면상의 X/Y 거리나 투영상 가까움은 이웃 관계가 아닙니다. 반드시 하나의 폐곡선을 따라 **FRONT ARC → SIDE → BACK ARC → SIDE → FRONT ARC** 순으로 추적합니다.
-
-특히 서로 다른 깊이의 FRONT ARC와 BACK ARC가 화면상 겹치거나 붙어 보이는 지점에서 두 구간을 직접 연결하지 마세요. 실제 연결은 오직 양쪽 SIDE TURNING ZONES를 통해서만 이루어집니다.
-
-### LANDMARK / SEGMENT CHECKSUM — 내부 구조 검증
-손목에 옮기기 전에 PRODUCT MASTER에서 색상·소재·형태·금속·펜던트·특수 파츠 등 눈에 띄는 비반복 구성요소를 LANDMARK로 내부적으로 식별합니다. 특정 제품에 그런 파츠가 적다면 소재 변화나 형태 변화가 있는 비즈를 LANDMARK로 사용합니다.
-
-각 연속 LANDMARK 사이에 존재하는 비즈·파츠의 **개수, 순서, 재질 변화, 크기 변화**를 하나의 고정 SEGMENT로 취급합니다. 착용컷에서도 각 LANDMARK와 LANDMARK 사이의 SEGMENT가 그대로 유지되어야 합니다. 두 LANDMARK 사이의 중간 비즈를 생략하거나 다른 ARC의 LANDMARK를 끌어와 서로 붙이면 실패입니다.
-
-### 팔찌 노출 방향 — 앞면 메인 / FRONT ARC LOCK
-이번 착용컷에서는 PRODUCT MASTER의 **FRONT ARC가 그대로 카메라를 향하도록** 동일한 잠긴 팔찌 전체를 손목에 배치합니다.
-
-FRONT ARC의 실제 구간만 주 시각 구간으로 노출합니다. BACK ARC는 원래 연결 관계를 유지한 채 손목 양옆을 지나 뒤쪽으로 돌아가야 합니다.
-
-**BACK ARC의 파츠를 같이 보여주려고 앞으로 끌어오지 마세요.** PRODUCT MASTER에서 FRONT ARC와 BACK ARC에 따로 있던 LANDMARK가 결과에서 새 이웃처럼 나란히 붙으면 즉시 실패입니다.
-
-BACK ARC가 손목 뒤에서 부분적으로 또는 완전히 가려지는 것이 정상입니다. **가려짐 허용 > 잘못된 배열 노출**입니다.`;
- if(direction==='reverse') return `### SOURCE-OBJECT TRANSFER LOCK — 가장 중요
-이 작업은 팔찌를 설명문으로 다시 생성하는 작업이 아닙니다. **PRODUCT MASTER에 촬영된 팔찌 자체를 하나의 잠긴 연속 물체로 취급하여 손목 위로 옮기는 이미지 편집/오브젝트 전이 작업**으로 수행합니다.
-
-팔찌를 비즈 단위로 새로 그리거나, 보이는 특징을 보고 유사한 팔찌를 재합성하지 마세요. 먼저 PRODUCT MASTER의 팔찌 전체를 하나의 닫힌 루프로 고정한 뒤, **그 동일한 루프 전체만 손목 형태에 맞게 공간적으로 굽히고 회전하고 원근 변형**합니다.
-
-개별 비즈·파츠는 독립적으로 생성하거나 이동할 수 없습니다. 각 구성요소는 원래 양옆 이웃에 영구적으로 고정되어 있다고 가정합니다. 결과에서 특정 구간이 손목 뒤로 가려져도 구조를 보존하며, 가려진 부분을 보여주기 위해 새 비즈를 만들거나 다른 구간을 앞으로 당기지 마세요.
-
-### CLOSED-LOOP TOPOLOGY LOCK — 2D 해석 금지
-PRODUCT MASTER의 팔찌는 **하나의 닫힌 3D 원형 스트랜드**입니다. 먼저 현재 사진만을 기준으로 카메라에 가까운 전면 호를 FRONT ARC, 반대편 후면 호를 BACK ARC, 좌우에서 두 호가 실제로 이어지는 부분을 SIDE TURNING ZONES로 구분합니다.
-
-화면상의 X/Y 거리나 투영상 가까움은 이웃 관계가 아닙니다. 반드시 하나의 폐곡선을 따라 **FRONT ARC → SIDE → BACK ARC → SIDE → FRONT ARC** 순으로 추적합니다.
-
-특히 서로 다른 깊이의 FRONT ARC와 BACK ARC가 화면상 겹치거나 붙어 보이는 지점에서 두 구간을 직접 연결하지 마세요. 실제 연결은 오직 양쪽 SIDE TURNING ZONES를 통해서만 이루어집니다.
-
-### LANDMARK / SEGMENT CHECKSUM — 내부 구조 검증
-손목에 옮기기 전에 PRODUCT MASTER에서 색상·소재·형태·금속·펜던트·특수 파츠 등 눈에 띄는 비반복 구성요소를 LANDMARK로 내부적으로 식별합니다. 특정 제품에 그런 파츠가 적다면 소재 변화나 형태 변화가 있는 비즈를 LANDMARK로 사용합니다.
-
-각 연속 LANDMARK 사이에 존재하는 비즈·파츠의 **개수, 순서, 재질 변화, 크기 변화**를 하나의 고정 SEGMENT로 취급합니다. 착용컷에서도 각 LANDMARK와 LANDMARK 사이의 SEGMENT가 그대로 유지되어야 합니다. 두 LANDMARK 사이의 중간 비즈를 생략하거나 다른 ARC의 LANDMARK를 끌어와 서로 붙이면 실패입니다.
-
-### 반대편 노출 — BACK ARC를 위한 180° WHOLE-OBJECT ROTATION
-새로운 뒷면 디자인을 만들지 마세요. 위에서 잠근 **동일한 팔찌 전체를 하나의 rigid closed loop**로 취급하고, 개별 비즈는 전혀 움직이지 않은 상태에서 **팔찌 전체만 손목 둘레에서 약 180° 통째로 회전**합니다.
-
-회전 전: FRONT ARC = 카메라 쪽 / BACK ARC = 손목 반대쪽.
-회전 후: **기존 BACK ARC = 카메라 쪽 / 기존 FRONT ARC = 손목 반대쪽.**
-
-이 변화는 비즈의 재배열이 아니라 완성된 팔찌 전체 좌표계의 회전입니다. 각 구성요소의 두 실제 이웃과 각 LANDMARK 사이 SEGMENT는 회전 전후 완전히 동일해야 합니다.
-
-카메라를 향하는 주 시각 구간은 **기존 BACK ARC 하나뿐**입니다. 기존 FRONT ARC의 LANDMARK를 함께 보여주려고 옆이나 앞으로 이동시키지 마세요. 기존 FRONT ARC는 손목 측면을 지나 뒤쪽으로 돌아가며 부분적으로 또는 완전히 가려져도 정상입니다.
-
-**CRITICAL FAILURE:** PRODUCT MASTER에서 서로 다른 FRONT ARC와 BACK ARC에 있던 LANDMARK가 결과에서 서로 붙거나 거의 연속된 이웃처럼 보이면 실패입니다. 그러한 결과를 만들기보다 한쪽 LANDMARK를 손목 뒤로 가리세요. **가려짐 허용 > 잘못된 배열 노출**입니다.`;
-}
-function buildWear(){
- const prompt=`첨부된 이미지를 기반으로 현실적인 **팔찌 중심 패션 착용컷**을 만들어 주세요.
-
-## 이미지 및 제품 해석 규칙 — 반드시 먼저 적용
-Reference image 1 = 현재 작업의 팔찌 제품 사진 / PRODUCT MASTER.
-Reference image 2 = 착장·모델·패션·조명·촬영감 레퍼런스.
-매 작업마다 팔찌 디자인은 서로 다를 수 있습니다. 이전 작업에서 사용한 팔찌의 색상, 비즈, 파츠, 배열, 특징 또는 앞뒤 판정을 기억하거나 이번 작업에 가져오지 마세요. **현재 첨부된 PRODUCT MASTER만 이번 작업의 절대적인 제품 기준**으로 사용합니다.
-
-### 팔찌 — 최우선 / 동일 제품 유지 / 디자인 창작 금지
-**현재 제품 사진의 바로 그 팔찌 하나를 그대로 손목에 착용시킨 것처럼 표현**합니다. 유사한 새 팔찌를 생성하거나 디자인을 재구성하지 마세요.
-팔찌 폭은 제품 사진에서 보이는 것보다 약 5% 좁게 표현합니다.
-
-정확히 유지: **총 비즈 및 파츠 개수, 닫힌 원형 스트랜드를 따른 실제 순서, 각 비즈·파츠의 두 실제 이웃, 색상, 소재, 크기, 형태, 간격, 특수 파츠·금속 파츠·펜던트의 위치 관계.**
-금지: 비즈·파츠 추가, 삭제, 복제, 이동, 재배열, 교체, 색상 변경, 패턴 변경, 임의 대칭화, 디자인 단순화, 새로운 디자인 생성, 특정 파츠를 잘 보이게 하기 위한 위치 이동.
-착용을 위해 허용되는 변화는 **완성된 동일 팔찌 전체의 위치 변화, 팔찌 전체의 손목 둘레 회전, 손목 형태에 맞춘 연속적인 전체 루프 변형, 자연스러운 원근 변화**뿐입니다. **개별 비즈·파츠를 따로 생성하거나 다시 배치하는 방식은 금지**합니다.
-
-${directionBlock()}
-
-### 착장 레퍼런스 적용
-착장 레퍼런스의 모델 분위기·스타일·패션 감도·조명·명암·촬영 감도는 약 80% 참고합니다. 나머지 약 20%는 포즈와 손동작을 포함해 **넥라인, 프릴·레이스 여부, 소매·스트랩 형태, 허리선·핏, 옷 길이·실루엣, 소재·컬러·패턴, 레이어링, 신발 종류·컬러, 헤어 길이·스타일·컬러·앞머리·가르마, 가방, 시선·표정, 카메라 앵글·크롭, 배경 소품·색감, 조명·사진 질감** 중 일부만 매 생성마다 자연스럽게 랜덤 변주합니다. 모든 요소를 한 번에 바꾸지 말고 레퍼런스의 전체 인상과 정체성은 약 80% 유지합니다. 이 80/20 규칙은 착장과 연출에만 적용하며 **팔찌 디자인에는 절대 적용하지 않습니다.**
-
-### 기본 착용컷 연출 — 고정
-- 착용컷 타입: 항상 손목과 팔찌가 중심인 현실적인 패션 착용컷
-- 모델·착장·조명·명암·촬영 감도: 착장 레퍼런스를 약 80% 참고
-- 포즈: ${posePrompts[selectedPose]}
-- 손동작: 선택한 포즈에 맞게 자연스럽고 힘을 뺀 손동작
-- 손목 방향: 선택한 ARC가 가장 잘 보이도록 자연스럽게 조정
-- 카메라: 손목과 팔찌가 명확히 보이는 자연스러운 패션 스냅 앵글
-- 촬영 거리: 손목 중심 클로즈업~중근접, 팔찌가 핵심 초점
-- 화이트밸런스: 중성~약간 차가움
-
-### 공통 착용컷 연출
-한쪽 손목을 카메라 가까이 배치합니다. **현재 카메라를 향하도록 지정된 ARC만 선명하고 가리지 않게 노출**합니다. 반대 ARC가 손목 옆면 또는 뒤로 돌아가 부분적으로/완전히 가려지는 것은 정상이며, 가려진 파츠를 보여주기 위해 이동시키지 마세요.
-
-팔찌 외의 반지, 시계, 다른 팔찌, 목걸이, 귀걸이 등 모든 액세서리를 제거합니다. 자연스러운 피부 질감과 현실적인 고해상도 패션 사진. 과도한 피부 보정, CGI 느낌, 인위적인 제품 카탈로그 포즈는 피합니다. 단일 사진만 생성하며 콜라주, 분할 화면, 멀티패널은 금지합니다.
-
-${$('extra').value.trim()?`### 추가 지시사항
-${$('extra').value.trim()}
-
-`:''}### 최종 검증 및 우선순위
-생성 전에 다음을 확인합니다.
-1. 현재 PRODUCT MASTER와 동일한 하나의 닫힌 원형 팔찌인가.
-2. 총 비즈·파츠 개수와 스트랜드상 순서 및 각 파츠의 두 실제 이웃이 유지되었는가.
-3. 각 LANDMARK 사이의 중간 비즈·파츠 개수와 SEGMENT 순서가 PRODUCT MASTER와 동일한가.
-4. FRONT ARC와 BACK ARC를 화면상 가까움 때문에 합치거나 서로 다른 ARC의 파츠를 새로운 이웃으로 만들지 않았는가.
-5. 팔찌를 새로 합성한 것이 아니라 **동일한 잠긴 source object 전체를 손목에 전이·변형한 결과**인가.
-6. 선택한 앞면/반대편 방향이 개별 비즈 이동이 아니라 완성된 팔찌 전체의 물리적 회전으로 구현되었는가.
-7. 반대 ARC의 파츠가 가려지더라도 이를 보여주기 위해 앞으로 이동시키지 않았는가.
-
-우선순위: **실제 원형 스트랜드 구조와 이웃 관계 보존 > 선택한 ARC의 정확한 노출 방향 > 팔찌의 선명한 노출 > 착장·연출 > 미관.**
-
-**서로 다른 ARC에 있던 파츠가 결과에서 새로운 이웃처럼 붙으면 실패입니다. 팔찌를 비슷하게 새로 만드는 것이 아니라, 현재 PRODUCT MASTER의 동일한 원형 팔찌를 실제 손목에 착용시킨 결과여야 합니다.**`;
- $('wearFinal').value=prompt;
-}
-let selectedPose='P01';
-const poseNames={
-P01:'손목을 카메라 쪽으로 자연스럽게 내밀기',P02:'손을 아래로 자연스럽게 떨어뜨리기',P03:'반대손으로 손목 아래 받치기',P04:'반대쪽 팔꿈치 가볍게 잡기',P05:'소매 끝 살짝 잡아 올리기',P06:'가방끈 가볍게 잡기',P07:'컵 손잡이 잡기',P08:'투명 유리잔 감싸기',P09:'휴대폰 한 손으로 들기',P10:'휴대폰 두 손으로 타이핑',P11:'책 페이지 넘기기',P12:'책 한 권 받치기',P13:'레코드 넘기기',P14:'테이블 위 물건 집기',P15:'테이블 위 손등 사선으로 놓기',P16:'테이블 끝에서 손 늘어뜨리기',P17:'난간 위에 손 얹기',P18:'문 손잡이 누르기',P19:'커튼 가장자리 밀기',P20:'머리카락 귀 뒤로 넘기기',P21:'머리카락 끝 모아 잡기',P22:'목 뒤 머리카락 정리하기',P23:'옷깃 가장자리 만지기',P24:'상의 밑단 살짝 당기기',P25:'치마자락 한쪽 집기',P26:'앞주머니에 손 반쯤 넣기',P27:'엄지만 주머니에 걸기',P28:'허리선에 손 얹기',P29:'앉아서 무릎 위에 손 올리기',P30:'앉아서 무릎 사이로 손 내리기',P31:'양손 느슨하게 겹치기',P32:'반대쪽 어깨에 손 얹기',P33:'꽃 한 송이 느슨하게 잡기',P34:'선글라스 한쪽 다리 잡기',P35:'쇼핑백 손잡이 잡기',P36:'걷는 순간 자연스러운 팔 스윙'};
-function renderPoses(){const box=$('poseButtons');box.innerHTML='';Object.entries(poseNames).forEach(([id,name])=>{const b=document.createElement('button');b.type='button';b.className='pose-btn'+(id===selectedPose?' active':'');b.textContent=name;b.onclick=()=>{selectedPose=id;renderPoses();buildWear();};box.appendChild(b)});$('poseSelected').textContent='선택: '+poseNames[selectedPose];}
-$('randomPose').addEventListener('click',()=>{const ids=Object.keys(poseNames);let next=selectedPose;while(ids.length>1&&next===selectedPose)next=ids[Math.floor(Math.random()*ids.length)];selectedPose=next;renderPoses();buildWear();const active=document.querySelector('.pose-btn.active');if(active)active.scrollIntoView({behavior:'smooth',block:'nearest'});});
-$('extra').addEventListener('input',buildWear);
-$('copyWear').addEventListener('click',()=>copyText($('wearFinal').value,$('copyWear')));
-$('resetWear').addEventListener('click',()=>{direction='front';selectedPose='P01';document.querySelectorAll('#directionChoices .choice').forEach((x,i)=>x.classList.toggle('active',i===0));$('extra').value='';renderPoses();buildWear();toast('기본값으로 초기화했습니다.')});
-renderPoses();buildWear();
+$('frontPreview').textContent=wearPrompts.front;
+$('reversePreview').textContent=wearPrompts.reverse;
+document.querySelectorAll('.wear-copy').forEach(btn=>btn.addEventListener('click',()=>copyText(wearPrompts[btn.dataset.wear],btn)));
 </script>
 </body>
 </html>
