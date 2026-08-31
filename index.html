@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Bracelet Prompt Studio</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--text:#101828;--muted:#667085;--line:#e4e7ec;--primary:#4f46e5;--primary2:#06b6d4;--soft:#eef2ff;--dark:#101828;--green:#12b76a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Pretendard,"Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,select,textarea,input{font:inherit}button{cursor:pointer}.app{max-width:1240px;margin:0 auto;padding:28px 22px 80px}
+.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:22px}.brand h1{margin:0;font-size:28px;letter-spacing:-.04em}.brand p{margin:7px 0 0;color:var(--muted);font-size:13px}
+.tabs{display:flex;gap:8px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:6px}.tab{border:0;background:transparent;padding:10px 15px;border-radius:10px;font-weight:900;color:#475467}.tab.active{background:var(--primary);color:#fff}
+.panel{display:none}.panel.active{display:block}.section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:24px 0 14px}.section-title h2{margin:0;font-size:22px;letter-spacing:-.03em}.section-title p{margin:5px 0 0;color:var(--muted);font-size:12px;line-height:1.55}
+.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 2px 8px rgba(16,24,40,.035)}.card h3{margin:0 0 6px;font-size:17px}.card p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.meta{margin-top:13px;padding:11px 12px;border-radius:11px;background:#f8fafc;color:#475467;font-size:11px;line-height:1.65}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:10px;padding:11px 14px;font-weight:900;font-size:13px}.btn.primary{background:var(--primary);color:#fff}.btn.secondary{background:#eaecf0;color:#344054}.btn.success{background:var(--green);color:#fff}
+.workflow{display:grid;grid-template-columns:1fr 1fr;gap:14px}.hero-card{background:linear-gradient(135deg,#eef2ff,#ecfeff);border:1px solid #c7d2fe;border-radius:18px;padding:18px}.hero-card b{display:block;margin-bottom:6px}.hero-card p{margin:0;font-size:12px;line-height:1.7;color:#475467}
+.builder{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:14px;align-items:start;margin-top:14px}.form-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:900}.field small{font-size:10px;color:var(--muted);line-height:1.5}select,textarea{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);padding:11px 12px}textarea{min-height:98px;resize:vertical}
+.direction{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choice{border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px;text-align:left}.choice.active{border-color:var(--primary);background:var(--soft)}.choice b{display:block;font-size:12px}.choice span{display:block;margin-top:4px;font-size:10px;color:var(--muted);line-height:1.4}
+.pose-toolbar{display:flex;gap:8px;align-items:center;margin:8px 0 12px}.pose-toolbar .btn{flex:0 0 auto}.pose-selected{font-size:12px;color:var(--muted);font-weight:800}.pose-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-height:560px;overflow:auto;padding:2px}.pose-btn{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px;text-align:left;font-size:12px;font-weight:800;cursor:pointer;line-height:1.35}.pose-btn:hover,.pose-btn.active{border-color:var(--primary);background:#eef2ff;color:var(--primary)}@media(max-width:760px){.pose-buttons{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.output-card{position:sticky;top:16px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px}.output-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.output-head h3{margin:0;font-size:16px}#wearFinal{min-height:620px;background:var(--dark);color:#f8fafc;border-color:#1d2939;font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}
+.note{padding:11px 12px;border-radius:11px;background:#fffaeb;border:1px solid #fedf89;color:#7a2e0e;font-size:11px;line-height:1.6;margin-top:12px}.toast{position:fixed;right:22px;bottom:22px;background:#101828;color:#fff;padding:12px 16px;border-radius:10px;transform:translateY(140%);transition:.22s;z-index:50}.toast.show{transform:translateY(0)}
+@media(max-width:900px){.builder,.workflow{grid-template-columns:1fr}.output-card{position:static}.product-grid{grid-template-columns:1fr}}@media(max-width:620px){.topbar{align-items:flex-start;flex-direction:column}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.direction{grid-template-columns:1fr}.tabs{width:100%}.tab{flex:1}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand"><h1>Bracelet Prompt Studio</h1><p>제품컷 또는 착용컷을 선택 → 옵션 선택 → 최종 프롬프트 자동 생성 → 복사</p></div>
+    <div class="tabs"><button class="tab active" data-panel="productPanel">제품컷 프롬프트</button><button class="tab" data-panel="wearPanel">착용컷 프롬프트</button></div>
+  </div>
+
+  <section id="productPanel" class="panel active">
+    <div class="section-title"><div><h2>제품컷 프롬프트</h2><p>MASTER 제품 사진을 재설계하지 않고 구조·배열·형태·비율을 최대한 잠근 편집 프롬프트입니다.</p></div></div>
+    <div class="product-grid">
+      <article class="card"><h3>⭕ 항공컷</h3><p>제품 구조를 그대로 유지하면서 수학적으로 완전한 원에 가깝게 재배치하는 탑뷰.</p><div class="meta">1:1 · #FFFFFF · 무그림자 · 최소 여백 · 2000×2000+</div><div class="actions"><button class="btn primary" onclick="copyProduct('topView',this)">항공컷 프롬프트 복사</button></div></article>
+      <article class="card"><h3>◉ 정면컷</h3><p>완성된 항공컷을 MASTER로 사용해 구조는 유지하고 시점만 정면으로 전환.</p><div class="meta">수평 정렬 · 소프트 섀도 · 1:1 · 2000×2000+</div><div class="actions"><button class="btn primary" onclick="copyProduct('frontView',this)">정면컷 프롬프트 복사</button></div></article>
+      <article class="card"><h3>↖ 디테일컷 1</h3><p>항공컷의 정확한 중심을 기준으로 왼쪽 위 사분면을 확대.</p><div class="meta">상단-좌측 · 1:1 · Detail 2와 동일 확대율</div><div class="actions"><button class="btn primary" onclick="copyProduct('detail1',this)">디테일컷 1 프롬프트 복사</button></div></article>
+      <article class="card"><h3>↘ 디테일컷 2</h3><p>항공컷의 정확한 중심을 기준으로 오른쪽 아래 사분면을 같은 비율로 확대.</p><div class="meta">하단-우측 · 1:1 · Detail 1과 대각선 대응</div><div class="actions"><button class="btn primary" onclick="copyProduct('detail2',this)">디테일컷 2 프롬프트 복사</button></div></article>
+    </div>
+  </section>
+
+  <section id="wearPanel" class="panel">
+    <div class="section-title"><div><h2>착용컷 프롬프트 조합기</h2><p>제품 정면샷 + 착장 레퍼런스만 첨부합니다. 앞면/반대편과 포즈만 고르면 최종 프롬프트가 즉시 완성됩니다.</p></div></div>
+    <div class="workflow">
+      <div class="hero-card"><b>① 이미지 1 — 팔찌 제품 정면샷</b><p>현재 작업의 절대 PRODUCT MASTER. 작업마다 제품이 달라질 수 있으므로 이전 팔찌의 색상·파츠·배열을 기억하거나 재사용하지 않습니다.</p></div>
+      <div class="hero-card"><b>② 이미지 2 — 착장 / 모델 레퍼런스</b><p>모델 분위기·착장·패션 감도·조명·명암·촬영 감도만 참고합니다. 기본값은 약 80% 참고 + 포즈·손동작·일부 착장 디테일 20% 새 연출입니다.</p></div>
+    </div>
+    <div class="note"><b>제품 우선순위:</b> 현재 첨부된 팔찌 제품 사진 &gt; 착장 레퍼런스 &gt; 모든 연출 지시. 팔찌 디자인에는 80/20 창작 비율을 적용하지 않습니다.</div>
+
+    <div class="builder">
+      <div class="form-card">
+        <div class="field full"><label>팔찌 노출 방향</label><div class="direction" id="directionChoices">
+          <button class="choice active" type="button" data-value="front"><b>앞면 메인</b><span>제품사진의 카메라 가까운 앞쪽 스트랜드가 정면</span></button>
+          <button class="choice" type="button" data-value="reverse"><b>반대편 메인</b><span>동일 팔찌 전체를 손목에서 약 180° 회전</span></button>
+        </div></div>
+        <div class="field full"><label>포즈</label>
+          <div class="pose-toolbar"><button class="btn primary" type="button" id="randomPose">🎲 랜덤 포즈</button><span class="pose-selected" id="poseSelected"></span></div>
+          <div class="pose-buttons" id="poseButtons"></div>
+          <small>모든 착용컷은 손목·팔찌 중심. 원하는 포즈를 직접 누르거나 랜덤으로 선택합니다.</small>
+        </div>
+        <div class="field full"><label>추가 지시사항 · 선택</label><textarea id="extra" placeholder="예: 얼굴 제외, 흰 블라우스, 손목을 조금 더 가까이, 배경은 심플하게"></textarea></div>
+        <div class="note"><b>기본값 고정:</b> 착용컷은 항상 손목 위주 · 착장/모델/상의/조명/명암/촬영 감도는 레퍼런스를 약 80% 참고 · 포즈/손동작/일부 착장 디테일만 약 20% 새롭게 연출 · 중성~약간 차가운 화이트밸런스.</div>
+      </div>
+
+      <aside class="output-card"><div class="output-head"><h3>최종 착용컷 프롬프트</h3><button class="btn primary" id="copyWear">복사</button></div><textarea id="wearFinal" readonly></textarea><div class="actions"><button class="btn secondary" id="resetWear">기본값으로 초기화</button></div></aside>
+    </div>
+  </section>
+</div>
+<div class="toast" id="toast">복사 완료</div>
+<script>
+const productPrompts={
+ topView:`Take this bracelet image and reposition the components so the bracelet forms a mathematically perfect circle, not oval or irregular. The bracelet center must align exactly with the image center. Preserve the exact total component count, complete sequence, individual sizes, shapes, colors, gemstone transparency, opacity, marbling, inclusions, pearl texture, shell texture, wood grain, metal finish, engraved details, saturation and brightness. Do not add, remove, duplicate, reorder, replace, standardize or redesign any component. Background pure white (#FFFFFF). No shadows. Top-down view. Perfect 1:1 square canvas. Scale the entire bracelet as large as possible with only the minimum white margin, without cropping. Minimum 2000 × 2000 pixels.`,
+ frontView:`Take the attached bracelet top-view image and create a premium front-facing e-commerce product image. 
+ 
+THIS IS AN IMAGE EDITING TASK. 
+DO NOT GENERATE A NEW BRACELET. 
+DO NOT REDESIGN, REARRANGE, OR REBUILD ANY COMPONENT. 
+ 
+SOURCE IMAGE FIDELITY — ABSOLUTE REQUIREMENT 
+ 
+The attached top-view bracelet image is the MASTER reference. 
+ 
+Preserve exactly: 
+- total bead count 
+- complete bead sequence 
+- relative position of every bead 
+- position of every spacer bead 
+- position of every metal part 
+- position of every charm or pendant 
+- bracelet diameter 
+- bracelet proportions 
+- bead spacing 
+- bead contact points 
+- individual bead size 
+- individual bead shape 
+- gemstone colors 
+- gemstone transparency 
+- gemstone opacity 
+- gemstone marbling 
+- natural mineral inclusions 
+- pearl texture 
+- shell texture 
+- wood grain 
+- metal finish 
+- engraved details 
+- original color saturation 
+- original brightness 
+- original surface reflections 
+ 
+Never: 
+- redesign the bracelet 
+- change the bead order 
+- rotate individual beads 
+- arbitrarily move components 
+- add beads 
+- remove beads 
+- duplicate components 
+- simplify the design 
+- replace components 
+- standardize irregular components 
+- invent hidden details 
+- recreate the bracelet as a different design 
+ 
+VIEW CONVERSION 
+ 
+Convert only the viewing angle from top-down to front-facing. 
+Transform the bracelet naturally from the MASTER top-view image into a clean, professional front-facing e-commerce product view. 
+The bracelet should appear evenly tensioned and geometrically balanced, as if precisely positioned for a professional jewelry catalog photograph. 
+Preserve the original circular component sequence and relative spacing while converting the bracelet into the natural perspective required for a front-facing view. 
+Do not introduce arbitrary twisting, sagging, deformation, or asymmetry. 
+ 
+STRICT HORIZONTAL ALIGNMENT — CRITICAL 
+ 
+The bracelet must be perfectly horizontally level from left to right. 
+Treat the final image as a precision e-commerce product photograph aligned to an invisible horizontal grid. 
+The bracelet must NOT be tilted, rotated, twisted, slanted, or diagonally oriented in any direction. 
+The leftmost outer edge of the bracelet and the rightmost outer edge of the bracelet must sit at exactly the same vertical height in the image. 
+The bracelet's central horizontal axis must be exactly parallel to the bottom edge of the square canvas. 
+Imagine a perfectly straight horizontal guideline passing through the geometric center of the bracelet. 
+There must be zero clockwise or counterclockwise rotation around the camera axis. 
+There must be zero perspective roll. 
+The left and right sides of the bracelet must have symmetrical perspective. 
+Both sides must rise from the front toward the back at the same visual angle. 
+The left side and right side must have equal apparent height. 
+The front-most visible bracelet line must remain visually level and horizontally balanced. 
+The rear-most visible bracelet line must also remain visually level and horizontally balanced. 
+ 
+Do not allow: 
+- one side to sit higher than the other 
+- diagonal rotation 
+- clockwise rotation 
+- counterclockwise rotation 
+- perspective roll 
+- asymmetric perspective 
+- twisted bracelet geometry 
+- uneven vertical positioning 
+- a sloping front bead line 
+- a sloping rear bead line 
+- one side appearing closer or higher than the opposite side without perspective justification 
+ 
+Horizontal alignment takes priority over creating a dynamic, casual, or naturally tilted composition. 
+The bracelet must look deliberately and precisely aligned for a professional jewelry catalog. 
+ 
+BEAD AND COMPONENT GEOMETRY 
+ 
+Every bead and component must retain its exact original individual shape. 
+ 
+Do not: 
+- flatten beads 
+- stretch beads 
+- compress beads 
+- enlarge beads 
+- shrink beads 
+- reshape beads 
+- standardize irregular beads 
+- merge adjacent components 
+- alter spacer thickness 
+- alter charm proportions 
+ 
+Each spherical bead must remain spherical. 
+Each irregular, carved, faceted, oval, cylindrical, cube-shaped, flower-shaped, shell, pearl, charm, spacer, or other component must retain its exact original shape from the MASTER image. 
+ 
+At bead contact points: 
+- no dents 
+- no flattening 
+- no carving 
+- no merging 
+- no artificial overlap 
+- no deformation 
+ 
+Adjacent components must meet naturally while preserving their individual silhouettes. 
+Do not distort individual components merely to make the overall bracelet geometry smoother. 
+ 
+COLOR AND MATERIAL FIDELITY 
+ 
+Preserve the exact original material appearance from the MASTER image. 
+ 
+Do not: 
+- brighten the bracelet 
+- oversaturate colors 
+- increase contrast 
+- alter hue 
+- make gemstones clearer than the original 
+- make gemstones more transparent than the original 
+- remove natural inclusions 
+- exaggerate gemstone marbling 
+- smooth natural surface variation 
+- artificially whiten pearls or shell 
+- polish metal beyond the original appearance 
+ 
+Preserve the exact original: 
+- color saturation 
+- brightness 
+- opacity 
+- transparency 
+- marbling 
+- inclusions 
+- surface texture 
+- material variation 
+ 
+LIGHTING 
+ 
+Use soft professional studio lighting appropriate for a clean e-commerce jewelry photograph. 
+Light source from slightly above and slightly in front. 
+Preserve natural material reflections. 
+ 
+Do not add: 
+- dramatic highlights 
+- rim lighting 
+- glow 
+- sparkle effects 
+- artificial reflections 
+- strong directional lighting 
+- excessive contrast 
+ 
+The lighting must support visibility of the original materials without changing their appearance. 
+ 
+SHADOW 
+ 
+Background stays pure white (#FFFFFF). 
+Add a soft, natural drop shadow directly beneath the bracelet. 
+ 
+The shadow must: 
+- contact the bracelet naturally 
+- remain subtle 
+- remain softly feathered 
+- follow the bracelet's actual position 
+- reinforce that the bracelet is level 
+- never appear heavy or artificial 
+ 
+Do not use the shadow to create artificial depth, tilt, or dramatic perspective. 
+ 
+COMPOSITION — STRICT SQUARE OUTPUT 
+ 
+Use a perfect 1:1 square canvas. 
+Front-facing view only. 
+Center the bracelet precisely in the square canvas. 
+The bracelet must fill the square frame prominently. 
+Scale the bracelet as large as reasonably possible while keeping the entire bracelet visible. 
+Use only the minimum clean white margin necessary to prevent the bracelet from being cropped. 
+Do not deliberately create generous white margins. 
+Do not shrink the bracelet merely to create additional negative space. 
+Do not leave excessive empty space above, below, left, or right. 
+The product should visually dominate the frame while remaining completely visible. 
+The bracelet's geometric center must align with the image center. 
+The horizontal center axis of the bracelet must remain parallel to the bottom edge of the canvas. 
+Do not crop any bracelet component. 
+ 
+Minimum output resolution: 
+2000 × 2000 pixels. 
+ 
+FINAL VALIDATION — CHECK BEFORE OUTPUT 
+ 
+Before output, verify all of the following: 
+- identical total bead count 
+- identical complete bead sequence 
+- identical component sequence 
+- identical relative component positions 
+- identical individual bead sizes 
+- identical individual bead shapes 
+- identical spacer positions 
+- identical charm or pendant design 
+- identical colors 
+- identical textures 
+- identical material appearance 
+- identical gemstone marbling and inclusions 
+- identical original saturation and brightness 
+- no component has been added 
+- no component has been removed 
+- no component has been duplicated 
+- no component has been redesigned 
+- no bead has been flattened, stretched, compressed, or deformed 
+- only the viewing angle has been converted from top-down to front-facing 
+- the bracelet is evenly tensioned 
+- the bracelet is geometrically balanced 
+- the bracelet's horizontal center axis is exactly parallel to the bottom edge of the canvas 
+- the leftmost and rightmost outer edges are at exactly the same vertical height 
+- there is zero clockwise tilt 
+- there is zero counterclockwise tilt 
+- there is zero perspective roll 
+- the left and right sides have symmetrical perspective 
+- the front bead line is visually level 
+- the rear bead line is visually level 
+- the bracelet is centered 
+- the bracelet fills the square frame prominently 
+- there is no unnecessary surrounding white space 
+- the entire bracelet remains visible 
+- background is pure white (#FFFFFF) 
+- output is a perfect 1:1 square 
+- no redesign has occurred`,
+ detail1:`Create a high-resolution close-up detail image using the attached bracelet top-view image as the MASTER reference.
+
+THIS IS AN IMAGE EDITING AND CROPPING TASK.
+DO NOT GENERATE A NEW BRACELET.
+DO NOT REDESIGN OR REARRANGE ANY COMPONENT.
+
+CROP AREA
+
+Imagine a perfectly centered vertical line and a perfectly centered horizontal line crossing at the exact geometric center of the bracelet image.
+
+Use only the UPPER-LEFT quadrant of this centered cross as the primary detail area.
+
+Create a close-up enlargement of the bracelet section located in the upper-left quadrant.
+
+The crop must include the complete bracelet components naturally visible within that upper-left section, including any beads, spacer beads, charms, pendants, or metal parts intersecting that quadrant.
+
+The crop boundary must be based on the exact image center, not on any hand-drawn guide line.
+
+SYMMETRICAL DETAIL-CROP SYSTEM
+
+This image is Detail Cut 1 of a symmetrical two-image set.
+
+Detail Cut 1 and Detail Cut 2 must use:
+- identical enlargement ratio
+- identical crop dimensions
+- identical camera scale
+- identical bracelet-to-frame proportion
+- identical white margin
+- identical image resolution
+- diagonally mirrored crop positions
+
+Detail Cut 1 focuses on the upper-left section.
+Detail Cut 2 focuses on the diagonally opposite lower-right section.
+
+SOURCE FIDELITY — ABSOLUTE REQUIREMENT
+
+Preserve exactly from the MASTER top-view image:
+- bead count
+- visible bead sequence
+- position of every component
+- individual bead size
+- individual bead shape
+- bead spacing
+- bead contact points
+- bracelet curvature
+- charm or pendant position
+- spacer-bead position
+- metal-part position
+- metal-part shape
+- all original proportions
+- gemstone colors
+- color saturation
+- brightness
+- transparency
+- marbling
+- natural inclusions
+- surface textures
+- original reflections
+- original highlights
+
+Do not:
+- move any bead
+- rotate any component
+- add or remove beads
+- duplicate any component
+- replace any component
+- enlarge one bead independently
+- standardize irregular beads
+- reshape the bracelet
+- change the local curvature
+- brighten or oversaturate the product
+- invent hidden details
+- recreate the bracelet from scratch
+
+Each bead must retain its exact original silhouette.
+Do not flatten, stretch, compress, dent, merge, or deform beads at contact points.
+
+IMAGE QUALITY
+
+Render the selected upper-left bracelet section with increased optical clarity and fine detail only.
+
+The result must look like the exact same original photograph viewed through a higher-resolution close-up lens, not like a newly generated bracelet.
+
+BACKGROUND AND LIGHTING
+
+Background stays pure white (#FFFFFF).
+
+Preserve the original lighting direction, reflections, highlights, and natural shadow behavior from the MASTER top-view image.
+
+Do not add dramatic lighting, stronger reflections, glow, sparkle, or artificial contrast.
+
+COMPOSITION — STRICT SQUARE OUTPUT
+
+Use a perfect 1:1 square canvas.
+
+Do not create a portrait or landscape composition.
+
+Enlarge the selected bracelet section so it fills the square frame prominently, similar to a tightly framed jewelry detail crop.
+
+The bracelet curve should occupy most of the square canvas while preserving a balanced amount of clean white negative space.
+
+Avoid excessive empty space above, below, left, or right.
+
+The selected detail area must be scaled and positioned specifically for a square final image, not cropped from a taller rectangular composition afterward.
+
+Allow partial beads to exit the frame naturally at the outer crop edges when required by the exact quadrant crop.
+
+Do not shrink the bracelet section just to keep every visible bead fully inside the frame.
+
+Do not show the entire bracelet.
+
+Minimum output size: 2000 × 2000 pixels.
+
+FINAL VALIDATION
+
+Before output, verify:
+- only the upper-left bracelet section is enlarged
+- the crop is calculated from the exact geometric image center
+- the crop scale matches Detail Cut 2
+- the output is a tightly framed perfect square
+- no component has moved
+- no bead has changed shape, size, color, texture, or sequence
+- the image remains a close-up of the original top-view photograph`,
+ detail2:`Create a high-resolution close-up detail image using the attached bracelet top-view image as the MASTER reference.
+
+THIS IS AN IMAGE EDITING AND CROPPING TASK.
+DO NOT GENERATE A NEW BRACELET.
+DO NOT REDESIGN OR REARRANGE ANY COMPONENT.
+
+CROP AREA
+
+Imagine a perfectly centered vertical line and a perfectly centered horizontal line crossing at the exact geometric center of the bracelet image.
+
+Use only the LOWER-RIGHT quadrant of this centered cross as the primary detail area.
+
+Create a close-up enlargement of the bracelet section located in the lower-right quadrant.
+
+The crop must include the complete bracelet components naturally visible within that lower-right section, including any beads, spacer beads, charms, pendants, or metal parts intersecting that quadrant.
+
+The crop boundary must be based on the exact image center, not on any hand-drawn guide line.
+
+SYMMETRICAL DETAIL-CROP SYSTEM
+
+This image is Detail Cut 2 of a symmetrical two-image set.
+
+Detail Cut 1 and Detail Cut 2 must use:
+- identical enlargement ratio
+- identical crop dimensions
+- identical camera scale
+- identical bracelet-to-frame proportion
+- identical white margin
+- identical image resolution
+- diagonally mirrored crop positions
+
+Detail Cut 1 focuses on the diagonally opposite upper-left section.
+Detail Cut 2 focuses on the lower-right section.
+
+SOURCE FIDELITY — ABSOLUTE REQUIREMENT
+
+Preserve exactly from the MASTER top-view image:
+- bead count
+- visible bead sequence
+- position of every component
+- individual bead size
+- individual bead shape
+- bead spacing
+- bead contact points
+- bracelet curvature
+- charm or pendant position
+- spacer-bead position
+- metal-part position
+- metal-part shape
+- all original proportions
+- gemstone colors
+- color saturation
+- brightness
+- transparency
+- marbling
+- natural inclusions
+- surface textures
+- original reflections
+- original highlights
+
+Do not:
+- move any bead
+- rotate any component
+- add or remove beads
+- duplicate any component
+- replace any component
+- enlarge one bead independently
+- standardize irregular beads
+- reshape the bracelet
+- change the local curvature
+- brighten or oversaturate the product
+- invent hidden details
+- recreate the bracelet from scratch
+
+Each bead must retain its exact original silhouette.
+Do not flatten, stretch, compress, dent, merge, or deform beads at contact points.
+
+IMAGE QUALITY
+
+Render the selected lower-right bracelet section with increased optical clarity and fine detail only.
+
+The result must look like the exact same original photograph viewed through a higher-resolution close-up lens, not like a newly generated bracelet.
+
+BACKGROUND AND LIGHTING
+
+Background stays pure white (#FFFFFF).
+
+Preserve the original lighting direction, reflections, highlights, and natural shadow behavior from the MASTER top-view image.
+
+Do not add dramatic lighting, stronger reflections, glow, sparkle, or artificial contrast.
+
+COMPOSITION — STRICT SQUARE OUTPUT
+
+Use a perfect 1:1 square canvas.
+
+Do not create a portrait or landscape composition.
+
+Enlarge the selected bracelet section so it fills the square frame prominently, similar to a tightly framed jewelry detail crop.
+
+The bracelet curve should occupy most of the square canvas while preserving a balanced amount of clean white negative space.
+
+Avoid excessive empty space above, below, left, or right.
+
+The selected detail area must be scaled and positioned specifically for a square final image, not cropped from a taller rectangular composition afterward.
+
+Allow partial beads to exit the frame naturally at the outer crop edges when required by the exact quadrant crop.
+
+Do not shrink the bracelet section just to keep every visible bead fully inside the frame.
+
+Do not show the entire bracelet.
+
+Minimum output size: 2000 × 2000 pixels.
+
+FINAL VALIDATION
+
+Before output, verify:
+- only the lower-right bracelet section is enlarged
+- the crop is calculated from the exact geometric image center
+- the crop scale matches Detail Cut 1
+- the output is a tightly framed perfect square
+- no component has moved
+- no bead has changed shape, size, color, texture, or sequence
+- the image remains a close-up of the original top-view photograph`
+};
+const posePrompts={
+  "P01":"Extend the bracelet wrist slightly toward the camera with relaxed fingers. Keep the bracelet unobstructed and closest to the lens.",
+  "P02":"Let the bracelet arm hang naturally beside the body with the wrist gently turned toward camera.",
+  "P03":"Use the opposite hand to lightly support the underside of the bracelet wrist without touching or covering the bracelet.",
+  "P04":"Let the bracelet hand lightly hold the opposite elbow while keeping the bracelet wrist exposed near frame center.",
+  "P05":"Use the opposite hand to gently adjust the bracelet-side sleeve upward, stopping clearly above the bracelet.",
+  "P06":"Lightly hold a shoulder-bag strap with the bracelet hand while keeping the strap away from the bracelet.",
+  "P07":"Hold a simple cup by its handle in a natural lifestyle gesture; keep the bracelet wrist clearly visible.",
+  "P08":"Loosely wrap the bracelet hand around a plain clear glass, keeping the wrist above the glass and unobstructed.",
+  "P09":"Hold a plain smartphone casually in the bracelet hand with the phone below the wrist and the bracelet fully visible.",
+  "P10":"Hold a plain smartphone with both hands while keeping the bracelet wrist on the outside edge and clearly visible.",
+  "P11":"Turn one page of an open book with the bracelet hand, keeping the wrist and bracelet above the page and in focus.",
+  "P12":"Support the lower edge of a closed book with the bracelet hand while keeping the bracelet clearly separated from the book.",
+  "P13":"Browse through vinyl records with the bracelet hand, fingertips touching one sleeve while the wrist stays visible.",
+  "P14":"Reach naturally toward a small unbranded object on a table, with the bracelet wrist leading the gesture and remaining visible.",
+  "P15":"Rest the bracelet forearm diagonally on a clean tabletop, palm down, with the bracelet clearly visible near the center.",
+  "P16":"Rest the forearm on a table edge and let the hand fall naturally beyond it, exposing the bracelet at the wrist.",
+  "P17":"Rest the bracelet hand lightly on a simple railing with fingers relaxed and the wrist fully visible.",
+  "P18":"Press a simple door lever naturally with the bracelet hand, keeping the wrist closest to camera and unobstructed.",
+  "P19":"Gently move a plain curtain aside with the bracelet fingertips while keeping the bracelet wrist visible in side view.",
+  "P20":"Raise the bracelet hand to tuck a small section of hair behind the ear while keeping hair away from the bracelet.",
+  "P21":"Gather only the lower ends of the hair near the shoulder with the bracelet hand, leaving the wrist fully visible.",
+  "P22":"Reach behind the neck to adjust hair with the bracelet hand; keep the wrist turned outward so the bracelet remains visible.",
+  "P23":"Lightly touch or smooth the neckline, lapel, or shoulder strap with the bracelet hand while keeping the wrist exposed.",
+  "P24":"Pinch one small section of the top hem and pull it outward subtly with the bracelet hand, keeping the wrist unobstructed.",
+  "P25":"Lightly pinch a small section of skirt fabric with the bracelet hand while keeping the wrist free and visible.",
+  "P26":"Insert the bracelet hand halfway into a front pocket while keeping the wrist and bracelet fully outside the pocket edge.",
+  "P27":"Hook only the thumb into a front pocket while all other fingers remain outside and the bracelet stays above the pocket line.",
+  "P28":"Rest the bracelet hand naturally at the side waist above the hip with the elbow relaxed and wrist turned toward camera.",
+  "P29":"While seated, rest the bracelet hand palm-down on one knee and keep the bracelet centered and unobstructed.",
+  "P30":"While seated, let the bracelet arm descend naturally between the knees with the hand relaxed and wrist visible.",
+  "P31":"Loosely overlap both hands on the lap or torso with the bracelet hand clearly on top and the wrist exposed.",
+  "P32":"Cross the bracelet arm diagonally and rest the hand lightly on the opposite shoulder, keeping the bracelet visible in front of the torso.",
+  "P33":"Hold one thin flower stem loosely between the fingers of the bracelet hand, keeping the wrist unobstructed.",
+  "P34":"Hold folded sunglasses by one temple with the bracelet hand while keeping the object secondary and the wrist visible.",
+  "P35":"Loosely hold plain shopping-bag handles with the bracelet hand, keeping the bracelet clearly above the grip.",
+  "P36":"Capture a candid mid-step moment with the bracelet arm swinging naturally forward while the bracelet and wrist remain sharp."
+};
+let direction='front';
+const $=id=>document.getElementById(id);
+function toast(msg='복사 완료'){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1600)}
+async function copyText(text,btn){try{await navigator.clipboard.writeText(text);if(btn){const old=btn.textContent;btn.textContent='복사 완료 ✓';btn.classList.add('success');setTimeout(()=>{btn.textContent=old;btn.classList.remove('success')},1300)}toast();}catch(e){const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast();}}
+function copyProduct(key,btn){copyText(productPrompts[key],btn)}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.panel').forEach(x=>x.classList.remove('active'));b.classList.add('active');$(b.dataset.panel).classList.add('active')}));
+document.querySelectorAll('#directionChoices .choice').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#directionChoices .choice').forEach(x=>x.classList.remove('active'));b.classList.add('active');direction=b.dataset.value;buildWear()}));
+function directionBlock(){
+ if(direction==='front') return `### SOURCE-OBJECT TRANSFER LOCK — 가장 중요
+이 작업은 팔찌를 설명문으로 다시 생성하는 작업이 아닙니다. **PRODUCT MASTER에 촬영된 팔찌 자체를 하나의 잠긴 연속 물체로 취급하여 손목 위로 옮기는 이미지 편집/오브젝트 전이 작업**으로 수행합니다.
+
+팔찌를 비즈 단위로 새로 그리거나, 보이는 특징을 보고 유사한 팔찌를 재합성하지 마세요. 먼저 PRODUCT MASTER의 팔찌 전체를 하나의 닫힌 루프로 고정한 뒤, **그 동일한 루프 전체만 손목 형태에 맞게 공간적으로 굽히고 회전하고 원근 변형**합니다.
+
+개별 비즈·파츠는 독립적으로 생성하거나 이동할 수 없습니다. 각 구성요소는 원래 양옆 이웃에 영구적으로 고정되어 있다고 가정합니다. 결과에서 특정 구간이 손목 뒤로 가려져도 구조를 보존하며, 가려진 부분을 보여주기 위해 새 비즈를 만들거나 다른 구간을 앞으로 당기지 마세요.
+
+### CLOSED-LOOP TOPOLOGY LOCK — 2D 해석 금지
+PRODUCT MASTER의 팔찌는 **하나의 닫힌 3D 원형 스트랜드**입니다. 먼저 현재 사진만을 기준으로 카메라에 가까운 전면 호를 FRONT ARC, 반대편 후면 호를 BACK ARC, 좌우에서 두 호가 실제로 이어지는 부분을 SIDE TURNING ZONES로 구분합니다.
+
+화면상의 X/Y 거리나 투영상 가까움은 이웃 관계가 아닙니다. 반드시 하나의 폐곡선을 따라 **FRONT ARC → SIDE → BACK ARC → SIDE → FRONT ARC** 순으로 추적합니다.
+
+특히 서로 다른 깊이의 FRONT ARC와 BACK ARC가 화면상 겹치거나 붙어 보이는 지점에서 두 구간을 직접 연결하지 마세요. 실제 연결은 오직 양쪽 SIDE TURNING ZONES를 통해서만 이루어집니다.
+
+### LANDMARK / SEGMENT CHECKSUM — 내부 구조 검증
+손목에 옮기기 전에 PRODUCT MASTER에서 색상·소재·형태·금속·펜던트·특수 파츠 등 눈에 띄는 비반복 구성요소를 LANDMARK로 내부적으로 식별합니다. 특정 제품에 그런 파츠가 적다면 소재 변화나 형태 변화가 있는 비즈를 LANDMARK로 사용합니다.
+
+각 연속 LANDMARK 사이에 존재하는 비즈·파츠의 **개수, 순서, 재질 변화, 크기 변화**를 하나의 고정 SEGMENT로 취급합니다. 착용컷에서도 각 LANDMARK와 LANDMARK 사이의 SEGMENT가 그대로 유지되어야 합니다. 두 LANDMARK 사이의 중간 비즈를 생략하거나 다른 ARC의 LANDMARK를 끌어와 서로 붙이면 실패입니다.
+
+### 팔찌 노출 방향 — 앞면 메인 / FRONT ARC LOCK
+이번 착용컷에서는 PRODUCT MASTER의 **FRONT ARC가 그대로 카메라를 향하도록** 동일한 잠긴 팔찌 전체를 손목에 배치합니다.
+
+FRONT ARC의 실제 구간만 주 시각 구간으로 노출합니다. BACK ARC는 원래 연결 관계를 유지한 채 손목 양옆을 지나 뒤쪽으로 돌아가야 합니다.
+
+**BACK ARC의 파츠를 같이 보여주려고 앞으로 끌어오지 마세요.** PRODUCT MASTER에서 FRONT ARC와 BACK ARC에 따로 있던 LANDMARK가 결과에서 새 이웃처럼 나란히 붙으면 즉시 실패입니다.
+
+BACK ARC가 손목 뒤에서 부분적으로 또는 완전히 가려지는 것이 정상입니다. **가려짐 허용 > 잘못된 배열 노출**입니다.`;
+ if(direction==='reverse') return `### SOURCE-OBJECT TRANSFER LOCK — 가장 중요
+이 작업은 팔찌를 설명문으로 다시 생성하는 작업이 아닙니다. **PRODUCT MASTER에 촬영된 팔찌 자체를 하나의 잠긴 연속 물체로 취급하여 손목 위로 옮기는 이미지 편집/오브젝트 전이 작업**으로 수행합니다.
+
+팔찌를 비즈 단위로 새로 그리거나, 보이는 특징을 보고 유사한 팔찌를 재합성하지 마세요. 먼저 PRODUCT MASTER의 팔찌 전체를 하나의 닫힌 루프로 고정한 뒤, **그 동일한 루프 전체만 손목 형태에 맞게 공간적으로 굽히고 회전하고 원근 변형**합니다.
+
+개별 비즈·파츠는 독립적으로 생성하거나 이동할 수 없습니다. 각 구성요소는 원래 양옆 이웃에 영구적으로 고정되어 있다고 가정합니다. 결과에서 특정 구간이 손목 뒤로 가려져도 구조를 보존하며, 가려진 부분을 보여주기 위해 새 비즈를 만들거나 다른 구간을 앞으로 당기지 마세요.
+
+### CLOSED-LOOP TOPOLOGY LOCK — 2D 해석 금지
+PRODUCT MASTER의 팔찌는 **하나의 닫힌 3D 원형 스트랜드**입니다. 먼저 현재 사진만을 기준으로 카메라에 가까운 전면 호를 FRONT ARC, 반대편 후면 호를 BACK ARC, 좌우에서 두 호가 실제로 이어지는 부분을 SIDE TURNING ZONES로 구분합니다.
+
+화면상의 X/Y 거리나 투영상 가까움은 이웃 관계가 아닙니다. 반드시 하나의 폐곡선을 따라 **FRONT ARC → SIDE → BACK ARC → SIDE → FRONT ARC** 순으로 추적합니다.
+
+특히 서로 다른 깊이의 FRONT ARC와 BACK ARC가 화면상 겹치거나 붙어 보이는 지점에서 두 구간을 직접 연결하지 마세요. 실제 연결은 오직 양쪽 SIDE TURNING ZONES를 통해서만 이루어집니다.
+
+### LANDMARK / SEGMENT CHECKSUM — 내부 구조 검증
+손목에 옮기기 전에 PRODUCT MASTER에서 색상·소재·형태·금속·펜던트·특수 파츠 등 눈에 띄는 비반복 구성요소를 LANDMARK로 내부적으로 식별합니다. 특정 제품에 그런 파츠가 적다면 소재 변화나 형태 변화가 있는 비즈를 LANDMARK로 사용합니다.
+
+각 연속 LANDMARK 사이에 존재하는 비즈·파츠의 **개수, 순서, 재질 변화, 크기 변화**를 하나의 고정 SEGMENT로 취급합니다. 착용컷에서도 각 LANDMARK와 LANDMARK 사이의 SEGMENT가 그대로 유지되어야 합니다. 두 LANDMARK 사이의 중간 비즈를 생략하거나 다른 ARC의 LANDMARK를 끌어와 서로 붙이면 실패입니다.
+
+### 반대편 노출 — BACK ARC를 위한 180° WHOLE-OBJECT ROTATION
+새로운 뒷면 디자인을 만들지 마세요. 위에서 잠근 **동일한 팔찌 전체를 하나의 rigid closed loop**로 취급하고, 개별 비즈는 전혀 움직이지 않은 상태에서 **팔찌 전체만 손목 둘레에서 약 180° 통째로 회전**합니다.
+
+회전 전: FRONT ARC = 카메라 쪽 / BACK ARC = 손목 반대쪽.
+회전 후: **기존 BACK ARC = 카메라 쪽 / 기존 FRONT ARC = 손목 반대쪽.**
+
+이 변화는 비즈의 재배열이 아니라 완성된 팔찌 전체 좌표계의 회전입니다. 각 구성요소의 두 실제 이웃과 각 LANDMARK 사이 SEGMENT는 회전 전후 완전히 동일해야 합니다.
+
+카메라를 향하는 주 시각 구간은 **기존 BACK ARC 하나뿐**입니다. 기존 FRONT ARC의 LANDMARK를 함께 보여주려고 옆이나 앞으로 이동시키지 마세요. 기존 FRONT ARC는 손목 측면을 지나 뒤쪽으로 돌아가며 부분적으로 또는 완전히 가려져도 정상입니다.
+
+**CRITICAL FAILURE:** PRODUCT MASTER에서 서로 다른 FRONT ARC와 BACK ARC에 있던 LANDMARK가 결과에서 서로 붙거나 거의 연속된 이웃처럼 보이면 실패입니다. 그러한 결과를 만들기보다 한쪽 LANDMARK를 손목 뒤로 가리세요. **가려짐 허용 > 잘못된 배열 노출**입니다.`;
+}
+function buildWear(){
+ const prompt=`첨부된 이미지를 기반으로 현실적인 **팔찌 중심 패션 착용컷**을 만들어 주세요.
+
+## 이미지 및 제품 해석 규칙 — 반드시 먼저 적용
+Reference image 1 = 현재 작업의 팔찌 제품 사진 / PRODUCT MASTER.
+Reference image 2 = 착장·모델·패션·조명·촬영감 레퍼런스.
+매 작업마다 팔찌 디자인은 서로 다를 수 있습니다. 이전 작업에서 사용한 팔찌의 색상, 비즈, 파츠, 배열, 특징 또는 앞뒤 판정을 기억하거나 이번 작업에 가져오지 마세요. **현재 첨부된 PRODUCT MASTER만 이번 작업의 절대적인 제품 기준**으로 사용합니다.
+
+### 팔찌 — 최우선 / 동일 제품 유지 / 디자인 창작 금지
+**현재 제품 사진의 바로 그 팔찌 하나를 그대로 손목에 착용시킨 것처럼 표현**합니다. 유사한 새 팔찌를 생성하거나 디자인을 재구성하지 마세요.
+팔찌 폭은 제품 사진에서 보이는 것보다 약 5% 좁게 표현합니다.
+
+정확히 유지: **총 비즈 및 파츠 개수, 닫힌 원형 스트랜드를 따른 실제 순서, 각 비즈·파츠의 두 실제 이웃, 색상, 소재, 크기, 형태, 간격, 특수 파츠·금속 파츠·펜던트의 위치 관계.**
+금지: 비즈·파츠 추가, 삭제, 복제, 이동, 재배열, 교체, 색상 변경, 패턴 변경, 임의 대칭화, 디자인 단순화, 새로운 디자인 생성, 특정 파츠를 잘 보이게 하기 위한 위치 이동.
+착용을 위해 허용되는 변화는 **완성된 동일 팔찌 전체의 위치 변화, 팔찌 전체의 손목 둘레 회전, 손목 형태에 맞춘 연속적인 전체 루프 변형, 자연스러운 원근 변화**뿐입니다. **개별 비즈·파츠를 따로 생성하거나 다시 배치하는 방식은 금지**합니다.
+
+${directionBlock()}
+
+### 착장 레퍼런스 적용
+착장 레퍼런스의 모델 분위기·스타일·패션 감도·조명·명암·촬영 감도는 약 80% 참고합니다. 나머지 약 20%는 포즈와 손동작을 포함해 **넥라인, 프릴·레이스 여부, 소매·스트랩 형태, 허리선·핏, 옷 길이·실루엣, 소재·컬러·패턴, 레이어링, 신발 종류·컬러, 헤어 길이·스타일·컬러·앞머리·가르마, 가방, 시선·표정, 카메라 앵글·크롭, 배경 소품·색감, 조명·사진 질감** 중 일부만 매 생성마다 자연스럽게 랜덤 변주합니다. 모든 요소를 한 번에 바꾸지 말고 레퍼런스의 전체 인상과 정체성은 약 80% 유지합니다. 이 80/20 규칙은 착장과 연출에만 적용하며 **팔찌 디자인에는 절대 적용하지 않습니다.**
+
+### 기본 착용컷 연출 — 고정
+- 착용컷 타입: 항상 손목과 팔찌가 중심인 현실적인 패션 착용컷
+- 모델·착장·조명·명암·촬영 감도: 착장 레퍼런스를 약 80% 참고
+- 포즈: ${posePrompts[selectedPose]}
+- 손동작: 선택한 포즈에 맞게 자연스럽고 힘을 뺀 손동작
+- 손목 방향: 선택한 ARC가 가장 잘 보이도록 자연스럽게 조정
+- 카메라: 손목과 팔찌가 명확히 보이는 자연스러운 패션 스냅 앵글
+- 촬영 거리: 손목 중심 클로즈업~중근접, 팔찌가 핵심 초점
+- 화이트밸런스: 중성~약간 차가움
+
+### 공통 착용컷 연출
+한쪽 손목을 카메라 가까이 배치합니다. **현재 카메라를 향하도록 지정된 ARC만 선명하고 가리지 않게 노출**합니다. 반대 ARC가 손목 옆면 또는 뒤로 돌아가 부분적으로/완전히 가려지는 것은 정상이며, 가려진 파츠를 보여주기 위해 이동시키지 마세요.
+
+팔찌 외의 반지, 시계, 다른 팔찌, 목걸이, 귀걸이 등 모든 액세서리를 제거합니다. 자연스러운 피부 질감과 현실적인 고해상도 패션 사진. 과도한 피부 보정, CGI 느낌, 인위적인 제품 카탈로그 포즈는 피합니다. 단일 사진만 생성하며 콜라주, 분할 화면, 멀티패널은 금지합니다.
+
+${$('extra').value.trim()?`### 추가 지시사항
+${$('extra').value.trim()}
+
+`:''}### 최종 검증 및 우선순위
+생성 전에 다음을 확인합니다.
+1. 현재 PRODUCT MASTER와 동일한 하나의 닫힌 원형 팔찌인가.
+2. 총 비즈·파츠 개수와 스트랜드상 순서 및 각 파츠의 두 실제 이웃이 유지되었는가.
+3. 각 LANDMARK 사이의 중간 비즈·파츠 개수와 SEGMENT 순서가 PRODUCT MASTER와 동일한가.
+4. FRONT ARC와 BACK ARC를 화면상 가까움 때문에 합치거나 서로 다른 ARC의 파츠를 새로운 이웃으로 만들지 않았는가.
+5. 팔찌를 새로 합성한 것이 아니라 **동일한 잠긴 source object 전체를 손목에 전이·변형한 결과**인가.
+6. 선택한 앞면/반대편 방향이 개별 비즈 이동이 아니라 완성된 팔찌 전체의 물리적 회전으로 구현되었는가.
+7. 반대 ARC의 파츠가 가려지더라도 이를 보여주기 위해 앞으로 이동시키지 않았는가.
+
+우선순위: **실제 원형 스트랜드 구조와 이웃 관계 보존 > 선택한 ARC의 정확한 노출 방향 > 팔찌의 선명한 노출 > 착장·연출 > 미관.**
+
+**서로 다른 ARC에 있던 파츠가 결과에서 새로운 이웃처럼 붙으면 실패입니다. 팔찌를 비슷하게 새로 만드는 것이 아니라, 현재 PRODUCT MASTER의 동일한 원형 팔찌를 실제 손목에 착용시킨 결과여야 합니다.**`;
+ $('wearFinal').value=prompt;
+}
+let selectedPose='P01';
+const poseNames={
+P01:'손목을 카메라 쪽으로 자연스럽게 내밀기',P02:'손을 아래로 자연스럽게 떨어뜨리기',P03:'반대손으로 손목 아래 받치기',P04:'반대쪽 팔꿈치 가볍게 잡기',P05:'소매 끝 살짝 잡아 올리기',P06:'가방끈 가볍게 잡기',P07:'컵 손잡이 잡기',P08:'투명 유리잔 감싸기',P09:'휴대폰 한 손으로 들기',P10:'휴대폰 두 손으로 타이핑',P11:'책 페이지 넘기기',P12:'책 한 권 받치기',P13:'레코드 넘기기',P14:'테이블 위 물건 집기',P15:'테이블 위 손등 사선으로 놓기',P16:'테이블 끝에서 손 늘어뜨리기',P17:'난간 위에 손 얹기',P18:'문 손잡이 누르기',P19:'커튼 가장자리 밀기',P20:'머리카락 귀 뒤로 넘기기',P21:'머리카락 끝 모아 잡기',P22:'목 뒤 머리카락 정리하기',P23:'옷깃 가장자리 만지기',P24:'상의 밑단 살짝 당기기',P25:'치마자락 한쪽 집기',P26:'앞주머니에 손 반쯤 넣기',P27:'엄지만 주머니에 걸기',P28:'허리선에 손 얹기',P29:'앉아서 무릎 위에 손 올리기',P30:'앉아서 무릎 사이로 손 내리기',P31:'양손 느슨하게 겹치기',P32:'반대쪽 어깨에 손 얹기',P33:'꽃 한 송이 느슨하게 잡기',P34:'선글라스 한쪽 다리 잡기',P35:'쇼핑백 손잡이 잡기',P36:'걷는 순간 자연스러운 팔 스윙'};
+function renderPoses(){const box=$('poseButtons');box.innerHTML='';Object.entries(poseNames).forEach(([id,name])=>{const b=document.createElement('button');b.type='button';b.className='pose-btn'+(id===selectedPose?' active':'');b.textContent=name;b.onclick=()=>{selectedPose=id;renderPoses();buildWear();};box.appendChild(b)});$('poseSelected').textContent='선택: '+poseNames[selectedPose];}
+$('randomPose').addEventListener('click',()=>{const ids=Object.keys(poseNames);let next=selectedPose;while(ids.length>1&&next===selectedPose)next=ids[Math.floor(Math.random()*ids.length)];selectedPose=next;renderPoses();buildWear();const active=document.querySelector('.pose-btn.active');if(active)active.scrollIntoView({behavior:'smooth',block:'nearest'});});
+$('extra').addEventListener('input',buildWear);
+$('copyWear').addEventListener('click',()=>copyText($('wearFinal').value,$('copyWear')));
+$('resetWear').addEventListener('click',()=>{direction='front';selectedPose='P01';document.querySelectorAll('#directionChoices .choice').forEach((x,i)=>x.classList.toggle('active',i===0));$('extra').value='';renderPoses();buildWear();toast('기본값으로 초기화했습니다.')});
+renderPoses();buildWear();
+</script>
+</body>
+</html>
